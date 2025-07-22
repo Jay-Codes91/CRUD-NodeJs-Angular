@@ -1,0 +1,39 @@
+<div class="form-signin w-100 m-auto mt-5">
+    <form [formGroup]="form" (ngSubmit)="login()">
+        <h1 class="h3 mb-3 fw-normal text-center">Iniciar Sesión</h1>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" id="nombre" formControlName="nombre" name="nombre" placeholder="name">
+            <label for="floatingInput">Usuario</label>
+        </div>
+
+        <!--Validación usuario-->
+        @if (form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)) {
+            @if(form.controls['nombre'].errors?.['required']){
+                <span class="text-danger">Campo requerido</span>
+            }
+
+            @if(form.controls['nombre'].errors?.['maxLength']){
+                <span class="text-danger">Excede el límite</span>
+            }
+
+        }
+
+        <div class="form-floating mt-2">
+            <input type="password" class="form-control" id="pass" formControlName="pass" name="pass" placeholder="Password">
+            <label for="pass">Contraseña</label>
+        </div>
+
+        <!--Validación contraseña-->
+        @if (form.controls['pass'].invalid && (form.controls['pass'].dirty || form.controls['pass'].touched)) {
+            @if(form.controls['pass'].errors?.['required']){
+                <span class="text-danger">Campo requerido</span>
+            }
+        }
+
+        <!--<a href="#" class="nav-link mt-2 text-primary" style="width: max-content;">¿Olvidó su contraseña?</a><br>-->
+        <button class="w-100 btn btn-lg btn-primary mt-2" type="submit" [disabled]="form.invalid">Ingresar</button>
+    </form>
+</div><br><br>
+
+
